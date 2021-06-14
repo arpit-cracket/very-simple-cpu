@@ -4,7 +4,13 @@ This is an implementation of a very simple CPU, comprising of 4 operations- JMP,
 I tried to implement the very simple CPU implementation from Carpinelli's Computer System Organization book.
 It is accompanied by a plain testbench, which does backdoor write to memory for initial instruction. Out of 100 current testbench infra is at 1, which present lots of scope of testbench improvement
 
-Potential problem in FETCH3 stage - 
+Command line to execute with VCS:
+Compile: vcs -kdb -debug_acc+all testbench.sv -sverilog
+Run: ./simv
+This will dump cpu.fsdb, which can be view in Verdi.
+Executing verdi- ./simv -verdi &
+
+Potential problem discovered in FETCH3 stage - 
 During implementation of verilog code, I realized that IR assignment happens during FETCH3 stage to IR register.
 And also in very next cycle the control unit requires IR value to be picked for deciding the next stage out of ADD/AND/JMP/INC.
 This will fail as it will pick the previous value of IR register.
